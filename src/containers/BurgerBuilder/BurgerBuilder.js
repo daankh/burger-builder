@@ -56,7 +56,7 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    const { ingredients } = this.state;
+    const { ingredients, totalPrice } = this.state;
     const disabledInfo = {
       ...this.state.ingredients,
     };
@@ -71,6 +71,7 @@ class BurgerBuilder extends Component {
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
           disabled={disabledInfo}
+          price={totalPrice}
         />
       </Fragment>
     );
