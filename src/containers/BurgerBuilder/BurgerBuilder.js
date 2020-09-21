@@ -80,6 +80,12 @@ class BurgerBuilder extends Component {
     });
   };
 
+  purchaseCloseHandler = () => {
+    this.setState({
+      purchasing: false,
+    });
+  };
+
   render() {
     const { ingredients, totalPrice, purchasable, purchasing } = this.state;
     const disabledInfo = {
@@ -91,7 +97,7 @@ class BurgerBuilder extends Component {
 
     return (
       <Fragment>
-        <Modal show={purchasing}>
+        <Modal show={purchasing} modalClosed={this.purchaseCloseHandler}>
           <OrderSummary ingredients={ingredients} />
         </Modal>
         <Burger ingredients={ingredients} />
