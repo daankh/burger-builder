@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
+import Button from "../../UI/Button/Button";
 
-const OrderSummary = ({ ingredients }) => {
+const OrderSummary = ({ ingredients, purchaseContinued, purchaseClosed }) => {
   const ingredientSummary = Object.keys(ingredients).map((igKey) => {
     return (
       <li key={igKey}>
@@ -15,6 +16,12 @@ const OrderSummary = ({ ingredients }) => {
       <p>A delicious burger with the following ingredients:</p>
       <ul>{ingredientSummary}</ul>
       <p>Continue to Checkout?</p>
+      <Button btnType="Danger" clicked={purchaseClosed}>
+        CANCEL
+      </Button>
+      <Button btnType="Success" clicked={purchaseContinued}>
+        CONTINUE
+      </Button>
     </Fragment>
   );
 };
