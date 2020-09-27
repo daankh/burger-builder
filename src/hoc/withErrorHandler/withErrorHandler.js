@@ -8,14 +8,14 @@ const withErrorMessage = (WrappedComponent, axios) => {
     };
 
     componentDidMount() {
-      axios.interceptors.request.use((req) => {
+      this.requestInterceptor = axios.interceptors.request.use((req) => {
         this.setState({
           error: null,
         });
         return req;
       });
 
-      axios.interceptors.response.use(
+      this.resonseInterceptor = axios.interceptors.response.use(
         (res) => res,
         (error) => {
           this.setState({
@@ -23,6 +23,11 @@ const withErrorMessage = (WrappedComponent, axios) => {
           });
         }
       );
+    }
+
+    componentWillUnmount() {
+      axios.interceptors.eject(this.requestInterceptor);
+      axios.interceptors.eject(this.resonseInterceptor);
     }
 
     errorConfirmedHandler = () => {
