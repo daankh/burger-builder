@@ -16,17 +16,31 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0,
-    },
+    ingredients: null,
     totalPrice: 4,
     purchasable: false,
     purchasing: false,
     loading: false,
+    error: null,
   };
+
+  componentDidMount() {
+    axios
+      .get("/ingredients.json")
+      .then((res) => {
+        const { data } = res;
+        this.setState({
+          ingredients: data,
+          error: null,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          ingredients: null,
+          error: err,
+        });
+      });
+  }
 
   updatePurchaseState = (ingredients) => {
     const sum = Object.keys(ingredients)
@@ -114,14 +128,12 @@ class BurgerBuilder extends Component {
         axios
           .post("/orders.json", order)
           .then((response) => {
-            console.log(response);
             this.setState({
               loading: false,
               purchasing: false,
             });
           })
           .catch((err) => {
-            console.log(err);
             this.setState({
               loading: false,
               purchasing: false,
@@ -138,6 +150,7 @@ class BurgerBuilder extends Component {
       purchasable,
       purchasing,
       loading,
+      error,
     } = this.state;
     const disabledInfo = {
       ...this.state.ingredients,
@@ -152,24 +165,33 @@ class BurgerBuilder extends Component {
           {loading ? (
             <Spinner />
           ) : (
-            <OrderSummary
-              ingredients={ingredients}
-              price={totalPrice}
-              purchaseContinued={this.purchaseContinueHandler}
-              purchaseClosed={this.purchaseCloseHandler}
-            />
+            ingredients && (
+              <OrderSummary
+                ingredients={ingredients}
+                price={totalPrice}
+                purchaseContinued={this.purchaseContinueHandler}
+                purchaseClosed={this.purchaseCloseHandler}
+              />
+            )
           )}
         </Modal>
-
-        <Burger ingredients={ingredients} />
-        <BuildControls
-          ingredientAdded={this.addIngredientHandler}
-          ingredientRemoved={this.removeIngredientHandler}
-          disabled={disabledInfo}
-          purchasable={purchasable}
-          price={totalPrice}
-          ordered={this.purchaseHandler}
-        />
+        {ingredients ? (
+          <Fragment>
+            <Burger ingredients={ingredients} />
+            <BuildControls
+              ingredientAdded={this.addIngredientHandler}
+              ingredientRemoved={this.removeIngredientHandler}
+              disabled={disabledInfo}
+              purchasable={purchasable}
+              price={totalPrice}
+              ordered={this.purchaseHandler}
+            />
+          </Fragment>
+        ) : error ? (
+          <p style={{ textAlign: "center" }}>{error.message}</p>
+        ) : (
+          <Spinner />
+        )}
       </Fragment>
     );
   }
