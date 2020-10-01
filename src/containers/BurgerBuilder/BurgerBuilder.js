@@ -105,42 +105,44 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    this.setState(
-      {
-        loading: true,
-      },
-      () => {
-        const { ingredients, totalPrice } = this.state;
-        const order = {
-          ingredients,
-          price: totalPrice,
-          customer: {
-            name: "Daniel",
-            address: {
-              street: "Wiśniowa",
-              zipcode: "12345",
-              country: "Poland",
-            },
-            email: "nana@ma.pl",
-          },
-          deliveryMethod: "fastest",
-        };
-        axios
-          .post("/orders.json", order)
-          .then((response) => {
-            this.setState({
-              loading: false,
-              purchasing: false,
-            });
-          })
-          .catch((err) => {
-            this.setState({
-              loading: false,
-              purchasing: false,
-            });
-          });
-      }
-    );
+    const { history } = this.props;
+    history.push("/checkout");
+    // this.setState(
+    //   {
+    //     loading: true,
+    //   },
+    //   () => {
+    //     const { ingredients, totalPrice } = this.state;
+    //     const order = {
+    //       ingredients,
+    //       price: totalPrice,
+    //       customer: {
+    //         name: "Daniel",
+    //         address: {
+    //           street: "Wiśniowa",
+    //           zipcode: "12345",
+    //           country: "Poland",
+    //         },
+    //         email: "nana@ma.pl",
+    //       },
+    //       deliveryMethod: "fastest",
+    //     };
+    //     axios
+    //       .post("/orders.json", order)
+    //       .then((response) => {
+    //         this.setState({
+    //           loading: false,
+    //           purchasing: false,
+    //         });
+    //       })
+    //       .catch((err) => {
+    //         this.setState({
+    //           loading: false,
+    //           purchasing: false,
+    //         });
+    //       });
+    //   }
+    // );
   };
 
   render() {
