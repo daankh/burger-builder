@@ -15,6 +15,10 @@ class ContactData extends Component {
           placeholder: "Your name",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       email: {
         elementType: "input",
@@ -23,6 +27,10 @@ class ContactData extends Component {
           placeholder: "Your email",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       country: {
         elementType: "input",
@@ -31,6 +39,10 @@ class ContactData extends Component {
           placeholder: "Your country",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       street: {
         elementType: "input",
@@ -39,6 +51,10 @@ class ContactData extends Component {
           placeholder: "Your street",
         },
         value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
       },
       zipCode: {
         elementType: "input",
@@ -47,6 +63,12 @@ class ContactData extends Component {
           placeholder: "Your ZIP code",
         },
         value: "",
+        validation: {
+          required: true,
+          minLength: 5,
+          maxLength: 5,
+        },
+        valid: false,
       },
       deliveryMethod: {
         elementType: "select",
@@ -114,9 +136,41 @@ class ContactData extends Component {
     };
     const updatedFormElement = { ...currentOrderForm[inputIdentifier] };
     updatedFormElement.value = value;
+    updatedFormElement.valid = this.checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation
+    );
     currentOrderForm[inputIdentifier] = updatedFormElement;
 
     this.setState({ orderForm: currentOrderForm });
+  };
+
+  checkValidity = (value, rules) => {
+    let isValid = false;
+    const trimmedValue = value.trim();
+
+    if (rules.required) {
+      isValid = trimmedValue !== "";
+      if (!isValid) {
+        return isValid;
+      }
+    }
+
+    if (rules.minLength) {
+      isValid = trimmedValue.length >= rules.minLength;
+      if (!isValid) {
+        return isValid;
+      }
+    }
+
+    if (rules.maxLength) {
+      isValid = trimmedValue.length <= rules.maxLength;
+      if (!isValid) {
+        return isValid;
+      }
+    }
+
+    return isValid;
   };
 
   render() {
