@@ -1,13 +1,14 @@
 import React from "react";
 import classes from "./Input.module.css";
 
-const Input = ({ elementType, elementConfig, value }) => {
+const Input = ({ elementType, elementConfig, value, changed }) => {
   let inputElement = null;
 
   switch (elementType) {
     case "input":
       inputElement = (
         <input
+          onChange={changed}
           className={classes.InputElement}
           {...elementConfig}
           value={value}
@@ -17,6 +18,7 @@ const Input = ({ elementType, elementConfig, value }) => {
     case "textarea":
       inputElement = (
         <textarea
+          onChange={changed}
           className={classes.InputElement}
           {...elementConfig}
           value={value}
@@ -25,9 +27,13 @@ const Input = ({ elementType, elementConfig, value }) => {
       break;
     case "select":
       inputElement = (
-        <select className={classes.InputElement} value={value}>
+        <select
+          onChange={changed}
+          className={classes.InputElement}
+          value={value}
+        >
           {elementConfig.options.map((option) => (
-            <option key={option} value={option.value}>
+            <option key={option.value} value={option.value}>
               {option.displayValue}
             </option>
           ))}

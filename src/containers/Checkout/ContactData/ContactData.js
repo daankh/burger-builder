@@ -101,26 +101,40 @@ class ContactData extends Component {
     );
   };
 
+  inputChangedHandler = (e, inputIdentifier) => {
+    const { value } = e.target;
+    const { orderForm } = this.state;
+    const currentOrderForm = {
+      ...orderForm,
+    };
+    const updatedFormElement = { ...currentOrderForm[inputIdentifier] };
+    updatedFormElement.value = value;
+    currentOrderForm[inputIdentifier] = updatedFormElement;
+
+    this.setState({ orderForm: currentOrderForm });
+  };
+
   render() {
     const { loading, orderForm } = this.state;
 
     const inputsArray = [];
     for (let key in orderForm) {
       inputsArray.push({
-        name: key,
+        id: key,
         config: orderForm[key],
       });
     }
 
     const inputElements = inputsArray.map((inputElement) => {
-      const { name, config } = inputElement;
+      const { id, config } = inputElement;
       const { elementType, elementConfig, value } = config;
       return (
         <Input
-          key={name}
+          key={id}
           elementType={elementType}
           elementConfig={elementConfig}
           value={value}
+          changed={(e) => this.inputChangedHandler(e, id)}
         />
       );
     });
