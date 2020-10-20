@@ -6,7 +6,8 @@ import {
   REMOVE_INGREDIENT,
   FETCH_INGREDIENTS_PRICES,
   FETCH_INGREDIENTS_PRICES_SUCCESS,
-  FETCH_INGREDIENTS_PRICES_ERROR
+  FETCH_INGREDIENTS_PRICES_ERROR,
+  RESET
 } from "../actionTypes/ingredients";
 import axios from "../../axios-orders";
 
@@ -63,6 +64,12 @@ const fetchIngredientsPricesSuccess = (payload) => {
     payload,
   };
 };
+
+export const resetIngredients = () => {
+  return {
+    type: RESET
+  }
+}
 
 
 

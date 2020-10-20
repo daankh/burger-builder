@@ -6,7 +6,8 @@ import {
   REMOVE_INGREDIENT,
   FETCH_INGREDIENTS_PRICES,
   FETCH_INGREDIENTS_PRICES_SUCCESS,
-  FETCH_INGREDIENTS_PRICES_ERROR
+  FETCH_INGREDIENTS_PRICES_ERROR,
+  RESET
 } from "../actionTypes/ingredients";
 
 const initialState = {
@@ -80,6 +81,10 @@ const ingredientsReducer = (state = initialState, action) => {
         prices: {},
         error: action.error,
       };
+    case RESET: 
+      return {
+        ...initialState
+      }
     default:
       return state;
   }

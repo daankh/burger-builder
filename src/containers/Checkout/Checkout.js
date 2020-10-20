@@ -35,7 +35,7 @@ class Checkout extends Component {
   };
 
   render() {
-    const { ingredients, totalPrice } = this.props;
+    const { ingredients } = this.props;
     return (
       <div>
         <CheckoutSummary
@@ -56,9 +56,8 @@ class Checkout extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  ingredients: state.ingredients.ingredients,
-  totalPrice: state.ingredients.totalPrice
+const mapStateToProps = ({ingredients}) => ({
+  ingredients: ingredients.ingredients,
 })
 
 export default connect(mapStateToProps)(Checkout);
