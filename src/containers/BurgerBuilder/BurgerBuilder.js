@@ -6,6 +6,7 @@ import {
   addIngredient,
   removeIngredient,
 } from "../../redux/actions/ingredients";
+import axios from "../../axios-orders"
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
@@ -181,5 +182,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(removeIngredient(ingredientName)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
 // export default withErrorHandler(BurgerBuilder, axios);
