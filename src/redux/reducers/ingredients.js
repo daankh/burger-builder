@@ -4,16 +4,14 @@ import {
   FETCH_INGREDIENTS_ERROR,
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
+  FETCH_INGREDIENTS_PRICES,
+  FETCH_INGREDIENTS_PRICES_SUCCESS,
+  FETCH_INGREDIENTS_PRICES_ERROR
 } from "../actionTypes/ingredients";
 
 const initialState = {
   ingredients: {},
-  prices: {
-    salad: 0.5,
-    cheese: 0.4,
-    meat: 1.3,
-    bacon: 0.7,
-  },
+  prices: {},
   totalPrice: 4,
   error: null,
   loading: false,
@@ -62,6 +60,26 @@ const ingredientsReducer = (state = initialState, action) => {
         error: action.error,
       };
     }
+    case FETCH_INGREDIENTS_PRICES: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case FETCH_INGREDIENTS_PRICES_SUCCESS:
+     return {
+        ...state,
+        loading: false,
+        error: null,
+        prices: action.payload,
+      };
+    case FETCH_INGREDIENTS_PRICES_ERROR:
+         return {
+        ...state,
+        loading: false,
+        prices: {},
+        error: action.error,
+      };
     default:
       return state;
   }
