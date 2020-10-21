@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 // import axios from "../../axios-orders";
 import { connect } from "react-redux";
 import {
-  fetchBurgerBuilderData,
+  initIngredients,
   addIngredient,
   removeIngredient,
 } from "../../redux/actions/burgerBuilder";
@@ -20,8 +20,8 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
-    const { fetchBurgerBuilderData } = this.props;
-    fetchBurgerBuilderData();
+    const { initIngredients } = this.props;
+    initIngredients();
   }
 
   updatePurchaseState = (ingredients) => {
@@ -167,7 +167,7 @@ const mapStateToProps = ({ burgerBuilder }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchBurgerBuilderData: () => dispatch(fetchBurgerBuilderData()),
+  initIngredients: () => dispatch(initIngredients()),
   addIngredient: (ingredientName) => dispatch(addIngredient(ingredientName)),
   removeIngredient: (ingredientName) =>
     dispatch(removeIngredient(ingredientName)),

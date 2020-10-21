@@ -73,7 +73,7 @@ export const resetIngredients = () => {
 
 
 
-export const fetchBurgerBuilderData = () => {
+export const initIngredients = () => {
   return (dispatch) => {
     dispatch(fetchIngredients());
     axios
