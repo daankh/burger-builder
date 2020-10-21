@@ -56,8 +56,8 @@ class Checkout extends Component {
   }
 }
 
-const mapStateToProps = ({ingredients}) => ({
-  ingredients: ingredients.ingredients,
+const mapStateToProps = ({burgerBuilder}) => ({
+  ingredients: burgerBuilder.ingredients,
 })
 
 export default connect(mapStateToProps)(Checkout);

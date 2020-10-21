@@ -2,10 +2,10 @@ import React, { Component, Fragment } from "react";
 // import axios from "../../axios-orders";
 import { connect } from "react-redux";
 import {
-  startFetchIngredients,
+  fetchBurgerBuilderData,
   addIngredient,
   removeIngredient,
-} from "../../redux/actions/ingredients";
+} from "../../redux/actions/burgerBuilder";
 import axios from "../../axios-orders"
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
@@ -20,8 +20,8 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
-    const { startFetchIngredients } = this.props;
-    startFetchIngredients();
+    const { fetchBurgerBuilderData } = this.props;
+    fetchBurgerBuilderData();
   }
 
   updatePurchaseState = (ingredients) => {
@@ -159,15 +159,15 @@ class BurgerBuilder extends Component {
   }
 }
 
-const mapStateToProps = ({ ingredients }) => ({
-  ingredients: ingredients.ingredients,
-  totalPrice: ingredients.totalPrice,
-  loading: ingredients.loading,
-  error: ingredients.error,
+const mapStateToProps = ({ burgerBuilder }) => ({
+  ingredients: burgerBuilder.ingredients,
+  totalPrice: burgerBuilder.totalPrice,
+  loading: burgerBuilder.loading,
+  error: burgerBuilder.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  startFetchIngredients: () => dispatch(startFetchIngredients()),
+  fetchBurgerBuilderData: () => dispatch(fetchBurgerBuilderData()),
   addIngredient: (ingredientName) => dispatch(addIngredient(ingredientName)),
   removeIngredient: (ingredientName) =>
     dispatch(removeIngredient(ingredientName)),

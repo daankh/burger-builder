@@ -8,7 +8,7 @@ import {
   FETCH_INGREDIENTS_PRICES_SUCCESS,
   FETCH_INGREDIENTS_PRICES_ERROR,
   RESET
-} from "../actionTypes/ingredients";
+} from "../actionTypes/burgerBuilder";
 
 const initialState = {
   ingredients: {},
@@ -18,7 +18,7 @@ const initialState = {
   loading: false,
 };
 
-const ingredientsReducer = (state = initialState, action) => {
+const burgerBuilderReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_INGREDIENT:
       return {
@@ -90,4 +90,4 @@ const ingredientsReducer = (state = initialState, action) => {
   }
 };
 
-export default ingredientsReducer;
+export default burgerBuilderReducer;

@@ -8,7 +8,7 @@ import {
   FETCH_INGREDIENTS_PRICES_SUCCESS,
   FETCH_INGREDIENTS_PRICES_ERROR,
   RESET
-} from "../actionTypes/ingredients";
+} from "../actionTypes/burgerBuilder";
 import axios from "../../axios-orders";
 
 export const addIngredient = (ingredientName) => {
@@ -73,7 +73,7 @@ export const resetIngredients = () => {
 
 
 
-export const startFetchIngredients = () => {
+export const fetchBurgerBuilderData = () => {
   return (dispatch) => {
     dispatch(fetchIngredients());
     axios

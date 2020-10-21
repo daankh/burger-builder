@@ -4,7 +4,7 @@ import axios from "../../../axios-orders";
 import Button from "../../../components/UI/Button/Button";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
-import { resetIngredients } from "../../../redux/actions/ingredients";
+import { resetIngredients } from "../../../redux/actions/burgerBuilder";
 import classes from "./ContactData.module.css";
 
 class ContactData extends Component {
@@ -244,9 +244,9 @@ class ContactData extends Component {
   }
 }
 
-const mapStateToProps = ({ingredients}) => ({
-  ingredients: ingredients.ingredients,
-  totalPrice: ingredients.totalPrice
+const mapStateToProps = ({burgerBuilder}) => ({
+  ingredients: burgerBuilder.ingredients,
+  totalPrice: burgerBuilder.totalPrice
 })
 
 const mapDispatchToProps = (dispatch) => ({
