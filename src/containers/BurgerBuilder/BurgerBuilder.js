@@ -137,7 +137,7 @@ class BurgerBuilder extends Component {
             )
           )}
         </Modal>
-        {ingredients ? (
+        {ingredients && !error ? (
           <Fragment>
             <Burger ingredients={ingredients} />
             <BuildControls
